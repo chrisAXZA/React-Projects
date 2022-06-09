@@ -5,7 +5,7 @@ import AboutUs from "./components/AboutUs.js";
 import Mission from "./components/Mission.js";
 import LatestNews from "./components/LatestNews.js";
 import TopServices from "./components/TopServices.js";
-import OurServices2 from "./components/OurServices2.js";
+import OurServices from "./components/OurServices.js";
 import PricingPlans from "./components/PricingPlans.js";
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 
       <AboutUs />
 
-      <OurServices2 />
+      <OurServices />
 
       <Search />
 

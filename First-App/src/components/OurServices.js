@@ -1,4 +1,4 @@
-function OurServices2() {
+function OurServices() {
     return (
         <div className="page-section bg-light">
             <div className="container">
@@ -88,4 +88,4 @@ function OurServices2() {
     );
 }
 
-export default OurServices2;
+export default OurServices;

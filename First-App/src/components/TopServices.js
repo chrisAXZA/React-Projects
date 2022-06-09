@@ -2,7 +2,7 @@ import ServiceCard1 from "./ServiceCard1.js";
 import ServiceCard2 from "./ServiceCard2.js";
 import ServiceCard3 from "./ServiceCard3.js";
 
-function OurServices() {
+function TopServices() {
     return (
         <div className="page-section">
             <div className="container">
@@ -20,4 +20,4 @@ function OurServices() {
     );
 }
 
-export default OurServices;
+export default TopServices;

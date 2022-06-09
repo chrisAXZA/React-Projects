@@ -1,6 +1,26 @@
 # First Demo App testing out React Syntax
 Basic company website layout employing SeoGram layout from free-css.com
 
+--
+
+### Welcome Page:
+<img src="Welcome-Page.png"/>
+
+--
+
+### Price Plan:
+<img src="Price-Plan.png"/>
+
+--
+
+### About Us:
+<img src="About-Us.png"/>
+
+--
+
+### Page Footer:
+<img src="Page-Footer.png"/>
+
 ---
 
 # Getting Started with Create React App

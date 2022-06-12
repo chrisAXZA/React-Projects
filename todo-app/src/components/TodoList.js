@@ -6,10 +6,17 @@ function TodoList() {
             <h2>Tasks</h2>
 
             <ul>
-                <TodoListItem text="Clean room"/>
-                <TodoListItem text="Go to the shopping mall"/>
-                <TodoListItem text="Upgrade coding skills"/>
-                <TodoListItem text="Cook a meal"/>
+                <TodoListItem>Clean room</TodoListItem>
+                <TodoListItem>Go to the shopping mall</TodoListItem>
+                <TodoListItem>Upgrade coding skills</TodoListItem>
+                <TodoListItem>Cook a meal</TodoListItem>
+                {/* <TodoListItem text="Clean room" /> */}
+                {/* <TodoListItem text="Go to the shopping mall" /> */}
+                {/* <TodoListItem text="Upgrade coding skills" /> */}
+                {/* <TodoListItem text="Cook a meal" /> */}
+
+
+                {/* React.createElement(TodoListItem, {text:"Cook a meal"}) */}
                 {/* <li>Clean room</li>
                 <li>Go to the shopping mall</li>
                 <li>Upgrade coding skills</li>

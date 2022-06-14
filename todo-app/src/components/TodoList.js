@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import TodoListItem from "./TodoListItem.js";
 
 function TodoList() {
-    let todoState = React.useState([
-        'Initial Todo',
-    ]);
+    // let todoState = React.useState([
+    //     'Initial Todo',
+    // ]);
 
     // todo = getter, setTodo = setter
     // let [todo, setTodo] = useState('Intial Todo');
     let [count, setCount] = useState(0);
+    let [name, setName] = useState('Pesho');
 
     // let [todo, setTodo] = React.useState('Intial Todo');
     // let [todo, setTodo] = todoState;
@@ -31,11 +32,17 @@ function TodoList() {
     //     age: 32,
     // };
 
-    console.log('render');
+    // console.log('render');
+
+    // const addButtonClickHandler = () => setCount(count += 1);
+    const addButtonClickHandler2 = function () {
+        setCount(count + 1);
+        setName('Kotze' + count);
+    };
 
     return (
         <>
-            <h2>Counter</h2>
+            <h2>Counter with {name}</h2>
 
             <ul>
                 <TodoListItem>{count}</TodoListItem>
@@ -65,8 +72,11 @@ function TodoList() {
                 <li>Cook a meal</li> */}
             </ul>
 
-            <button onClick={() => setCount(count += 1)}>Increase</button>
-            <button onClick={() => setCount(count - 1)}>Decrease</button>
+            <button onClick={addButtonClickHandler2}>Increase</button>
+            {/* <button onClick={setCount.bind(null, count += 1)}>Increase</button> */}
+            <button onClick={setCount.bind(null, count - 1)}>Decrease</button>
+            {/* <button onClick={() => setCount(count += 1)}>Increase</button>
+            <button onClick={() => setCount(count - 1)}>Decrease</button> */}
         </>
     );
 

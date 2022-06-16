@@ -10,7 +10,8 @@ function TodoList() {
     // todo = getter, setTodo = setter
     // let [todo, setTodo] = useState('Intial Todo');
     let [count, setCount] = useState(0);
-    let [name, setName] = useState('Pesho');
+    let [name, setName] = useState('');
+    // let [name, setName] = useState('Pesho');
 
     // let [todo, setTodo] = React.useState('Intial Todo');
     // let [todo, setTodo] = todoState;
@@ -35,14 +36,34 @@ function TodoList() {
     // console.log('render');
 
     // const addButtonClickHandler = () => setCount(count += 1);
-    const addButtonClickHandler2 = function () {
+    const addButtonClickHandler2 = function (event) {
+        // console.log(event);
         setCount(count + 1);
-        setName('Kotze' + count);
+        // setName('Kotze' + count);
     };
+
+    const inputChangeHandler = (event) => {
+        setName(event.target.value);
+    };
+
+    const peshoHeader = (
+        <header>
+            <h3>Pesho is the best</h3>
+            <p>PESHO PESHO PESHO PESHO PESHO PESHO PESHO PESHO </p>
+        </header>
+    );
 
     return (
         <>
-            <h2>Counter with {name}</h2>
+            {/* <h2>Counter with {name}</h2> */}
+            {name && <h2>Counter with {name}</h2>}
+            {name || <h2>No name entered</h2>}
+
+            {name === 'Pesho'
+                ? peshoHeader
+                // ? <h3>Pesho is the best!</h3>
+                : <h3>Pesho is not here!</h3>
+            }
 
             <ul>
                 <TodoListItem>{count}</TodoListItem>
@@ -71,6 +92,9 @@ function TodoList() {
                 <li>Upgrade coding skills</li>
                 <li>Cook a meal</li> */}
             </ul>
+
+            <input type="text" onBlur={inputChangeHandler} />
+            {/* <input type="text" onChange={inputChangeHandler} /> */}
 
             <button onClick={addButtonClickHandler2}>Increase</button>
             {/* <button onClick={setCount.bind(null, count += 1)}>Increase</button> */}

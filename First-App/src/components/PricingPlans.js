@@ -34,7 +34,7 @@ function PricingPlans() {
                     <div className="col-lg-4 py-3 wow zoomIn">
                         <div className="card-pricing marked">
                             <div className="header">
-                                <div className="pricing-type">Standar</div>
+                                <div className="pricing-type">Standard</div>
                                 <div className="price">
                                     <span className="dollar">$</span>
                                     <h1>59<span className="suffix">.99</span></h1>

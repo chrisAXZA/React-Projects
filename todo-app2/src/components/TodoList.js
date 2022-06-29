@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import uniqid from 'uniqid';
+
 import TodoItem from "./TodoItem.js";
 
 function TodoList() {
@@ -26,7 +28,8 @@ function TodoList() {
         }
 
         let todo = {
-            id: todos.length + 1,
+            id: uniqid(),
+            // id: todos.length + 1,
             text: event.target.value,
         };
 
@@ -60,7 +63,7 @@ function TodoList() {
     const deleteTodoItemHandler = (id) => {
         // console.log('Remove task with id >>> ', id);
         // setTodos((state) => [...state].filter((x) => x.id !== id));
-        
+
         setTodos((state) => state.filter((x) => x.id !== id));
     };
 

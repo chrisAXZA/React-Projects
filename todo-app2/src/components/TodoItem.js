@@ -1,26 +1,33 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
+// import styles from './TodoItem.module.css';
+import  './TodoItem.css';
 
 function TodoItem({
-    id,
-    text,
+    // id,
+    // text,
+    todo,
     onDelete,
+    onClick,
 }) {
-    // console.log(text);
+    // console.log('Item rendered!');
     // const removeTaskHandler = () => console.log('Task removed!');
 
-    useEffect(() => {
-        console.log(`TodoItem <${id}> Mounted`);
+    // useEffect(() => {
+    //     console.log(`TodoItem <${id}> Mounted/DA-Change`);
 
-        // cleanUp function, containing cleanUp logic
-        return () => {
-            console.log(`TodoItem <${id}> Unmounted/CleanUp`)
-        };
-    }, []);
+    //     // cleanUp function, containing cleanUp logic
+    //     return () => {
+    //         console.log(`TodoItem <${id}> Unmounted/CleanUp`)
+    //     };
+    // }, [id]);
+    // when value passed to Dependency array, useEffect will only be triggered when changes occur to given value
 
     return (
-        <li>
-            Task - {text}
-            <button onClick={() => onDelete(id)}>Task Completed</button>
+        // <li onClick={() => onClick(todo.id)} className={styles['todo-item']}>
+        // <li onClick={() => onClick(todo.id)} className={styles.todoItem}>
+        <li onClick={() => onClick(todo.id)} className="todo-item">
+            Task - {todo.text}
+            <button onClick={() => onDelete(todo.id)}>Task Completed</button>
             {/* <button onClick={onDelete}>Task Completed</button> */}
         </li>
         // <li>Task - {todo.text}</li>

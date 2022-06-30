@@ -1,0 +1,11 @@
+.todo-item {
+    color: rebeccapurple;
+}
+
+/* will be attached to global scope, if in default css file instead of css module */
+/* li {
+
+} */
+/* label {
+    color: red;
+} */

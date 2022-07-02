@@ -25,7 +25,7 @@ function TodoItem({
     return (
         // <li onClick={() => onClick(todo.id)} className={styles['todo-item']}>
         // <li onClick={() => onClick(todo.id)} className={styles.todoItem}>
-        <li onClick={() => onClick(todo.id)} className="todo-item">
+        <li onClick={() => onClick(todo.id)} className={todo.isDone ? 'todo-item-done' : ''}>
             Task - {todo.text}
             <button onClick={() => onDelete(todo.id)}>Task Completed</button>
             {/* <button onClick={onDelete}>Task Completed</button> */}

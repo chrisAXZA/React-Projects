@@ -71,10 +71,17 @@ function TodoList() {
     const toggleTodoItemClickHandler = (id) => {
         setTodos((oldState) => {
             let selectedTodo = oldState.find((t) => t.id === id);
+            let selecteIndex = oldState.findIndex((t) => t.id === id);
             let toggledTodo = { ...selectedTodo, isDone: !selectedTodo.isDone };
-            let restTodos = oldState.filter((t) => t.id !== id);
+            let newState = [...oldState];
+            newState.splice(selecteIndex, 1, toggledTodo);
+            // console.log(newState);
 
-            return [...restTodos, toggledTodo];
+            return newState;
+
+            // let restTodos = oldState.filter((t) => t.id !== id);
+
+            // return [...restTodos, toggledTodo];
         });
     };
 

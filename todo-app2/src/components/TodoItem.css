@@ -2,6 +2,10 @@
     color: rebeccapurple;
 }
 
+.todo-item-done {
+    text-decoration: line-through;
+}
+
 /* will be attached to global scope, if in default css file instead of css module */
 /* li {
 

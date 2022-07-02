@@ -1,9 +1,10 @@
 .todo-item {
-    color: rebeccapurple;
+    color: violet;
 }
 
 .todo-item-done {
     text-decoration: line-through;
+    color: yellowgreen;
 }
 
 /* will be attached to global scope, if in default css file instead of css module */

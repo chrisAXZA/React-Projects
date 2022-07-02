@@ -1,6 +1,7 @@
 // import { useEffect } from 'react';
+
+import './TodoItem.css';
 // import styles from './TodoItem.module.css';
-import  './TodoItem.css';
 
 function TodoItem({
     // id,
@@ -24,8 +25,9 @@ function TodoItem({
 
     return (
         // <li onClick={() => onClick(todo.id)} className={styles['todo-item']}>
+
         // <li onClick={() => onClick(todo.id)} className={styles.todoItem}>
-        <li onClick={() => onClick(todo.id)} className={todo.isDone ? 'todo-item-done' : ''}>
+        <li onClick={() => onClick(todo.id)} className={todo.isDone ? 'todo-item-done' : 'todo-item'}>
             Task - {todo.text}
             <button onClick={() => onDelete(todo.id)}>Task Completed</button>
             {/* <button onClick={onDelete}>Task Completed</button> */}

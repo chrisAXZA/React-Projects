@@ -1,0 +1,12 @@
+/* .todo-item { */
+.todoItem {
+    color: rebeccapurple;
+}
+
+label {
+    color: red;
+}
+
+li {
+    background-color: violet;
+}

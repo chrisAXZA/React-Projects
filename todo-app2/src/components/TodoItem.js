@@ -23,13 +23,20 @@ function TodoItem({
     // }, [id]);
     // when value passed to Dependency array, useEffect will only be triggered when changes occur to given value
 
+    let listItemClasses = ['todo-item'];
+
+    if (todo.isDone) {
+        listItemClasses.push('todo-item-done');
+    }
+
     return (
         // <li onClick={() => onClick(todo.id)} className={styles['todo-item']}>
 
         // <li onClick={() => onClick(todo.id)} className={styles.todoItem}>
-        <li onClick={() => onClick(todo.id)} className={todo.isDone ? 'todo-item-done' : 'todo-item'}>
+        // <li onClick={() => onClick(todo.id)} className={todo.isDone ? 'todo-item-done' : 'todo-item'}>
+        <li onClick={() => onClick(todo.id)} className={listItemClasses.join(' ')}>
             Task - {todo.text}
-            <button onClick={() => onDelete(todo.id)}>Task Completed</button>
+            <button onClick={(event) => onDelete(event, todo.id)}>Task Completed</button>
             {/* <button onClick={onDelete}>Task Completed</button> */}
         </li>
         // <li>Task - {todo.text}</li>

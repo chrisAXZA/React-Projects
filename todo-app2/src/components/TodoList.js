@@ -4,12 +4,16 @@ import uniqid from 'uniqid';
 
 import TodoItem from "./TodoItem.js";
 
+const API_URL = 'http://localhost:3030/data';
+
 function TodoList() {
-    const todoList = [
-        { id: 'kvsfmrop', text: 'Clean up the apartement', isDone: false },
-        { id: 'kvsfm02j', text: 'Fix the heating', isDone: false },
-        { id: 'kvsfm88p', text: 'Buy groceries', isDone: false },
-    ];
+    // const todoList = [
+    //     { id: 'kvsfmrop', text: 'Clean up the apartement', isDone: false },
+    //     { id: 'kvsfm02j', text: 'Fix the heating', isDone: false },
+    //     { id: 'kvsfm88p', text: 'Buy groceries', isDone: false },
+    // ];
+
+    const todoList = [];
 
     const [todos, setTodos] = useState(todoList);
 
@@ -61,23 +65,33 @@ function TodoList() {
         event.target.value = '';
     };
 
-    const deleteTodoItemHandler = (id) => {
+    const deleteTodoItemHandler = (event, id) => {
         // console.log('Remove task with id >>> ', id);
         // setTodos((state) => [...state].filter((x) => x.id !== id));
+        event.stopPropagation();
 
-        setTodos((state) => state.filter((x) => x.id !== id));
+        setTodos((state) => {
+            // console.log(state);
+            return state.filter((x) => x.id !== id)
+        });
     };
 
     const toggleTodoItemClickHandler = (id) => {
         setTodos((oldState) => {
+            // console.log(oldState);
             let selectedTodo = oldState.find((t) => t.id === id);
             let selecteIndex = oldState.findIndex((t) => t.id === id);
             let toggledTodo = { ...selectedTodo, isDone: !selectedTodo.isDone };
-            let newState = [...oldState];
-            newState.splice(selecteIndex, 1, toggledTodo);
+            // let newState = [...oldState];
+            // newState.splice(selecteIndex, 1, toggledTodo);
             // console.log(newState);
+            // return newState;
 
-            return newState;
+            return [
+                ...oldState.slice(0, selecteIndex),
+                toggledTodo,
+                ...oldState.slice(selecteIndex + 1),
+            ];
 
             // let restTodos = oldState.filter((t) => t.id !== id);
 

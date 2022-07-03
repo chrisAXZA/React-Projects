@@ -3,8 +3,9 @@ import { useDeferredValue, useEffect, useState } from 'react';
 import uniqid from 'uniqid';
 
 import TodoItem from "./TodoItem.js";
+import { createTodo } from '../services/todoService.js';
 
-const API_URL = 'http://localhost:3030/data';
+const API_URL = 'http://localhost:3030/jsonstore';
 
 function TodoList() {
     // const todoList = [
@@ -83,9 +84,22 @@ function TodoList() {
         //     ]
         // );
 
-        
+        console.log('New Todo >>>', todo);
 
-        event.target.value = '';
+        createTodo(todo)
+            .then((createdTodo) => {
+                // console.log(createdTodo);
+                setTodos((oldState) => [
+                    ...oldState,
+                    createdTodo,
+                ]);
+                event.target.value = '';
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        // event.target.value = '';
     };
 
     const deleteTodoItemHandler = (event, id) => {

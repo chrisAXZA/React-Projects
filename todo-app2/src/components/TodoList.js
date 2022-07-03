@@ -115,15 +115,19 @@ function TodoList() {
 
     const toggleTodoItemClickHandler = (id) => {
         setTodos((oldState) => {
-           const newState = oldState.map((todo) => {
-                if (todo.id === id) {
-                    return { ...todo, isDone: !todo.isDone };
-                }
+            return oldState.map((todo) => todo.id === id
+                ? { ...todo, isDone: !todo.isDone }
+                : todo);
 
-                return todo;
-            });
+            //    const newState = oldState.map((todo) => {
+            //         if (todo.id === id) {
+            //             return { ...todo, isDone: !todo.isDone };
+            //         }
 
-            return newState;
+            //         return todo;
+            //     });
+
+            //     return newState;
 
             // // console.log(oldState);
             // let selectedTodo = oldState.find((t) => t.id === id);

@@ -28,10 +28,13 @@ function TodoList() {
                 return res.json();
             })
             .then((todosResult) => {
-                // console.log(todosResult)
-                setTodos((oldState)=>{
-                    return [...todosResult];
-                });
+                // console.log(todosResult);
+                // setTodos((oldState)=>{
+                //     return [...todosResult];
+                // });
+
+                setTodos(Object.values(todosResult));
+                // setTodos([...todosResult]);
             });
     }, []);
 
@@ -66,19 +69,21 @@ function TodoList() {
         // second variant with state which indicate that current state is being modified,
         // meaning current collection of todos that is being modified instead of taking collection
         // in useState declaration (which might not be up to date)
-        setTodos((state) =>
-            // reference to state is not changed, component will not be re-rendered       
-            // {
-            //     state.push(todo);
-            //     console.log(state);
-            //     return state;
-            // }
+        // setTodos((state) =>
+        //     // reference to state is not changed, component will not be re-rendered       
+        //     // {
+        //     //     state.push(todo);
+        //     //     console.log(state);
+        //     //     return state;
+        //     // }
 
-            [
-                ...state,
-                todo,
-            ]
-        );
+        //     [
+        //         ...state,
+        //         todo,
+        //     ]
+        // );
+
+        
 
         event.target.value = '';
     };

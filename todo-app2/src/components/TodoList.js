@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useDeferredValue, useEffect, useState } from 'react';
 
 import uniqid from 'uniqid';
 
@@ -16,6 +16,24 @@ function TodoList() {
     const todoList = [];
 
     const [todos, setTodos] = useState(todoList);
+
+    // standard fetch should be avoided, as will be called each time list is being updated
+
+    useEffect(() => {
+        console.log(`Initializing collection >>>`);
+
+        fetch(`${API_URL}/todos`)
+            .then((res) => {
+                // console.log(res);
+                return res.json();
+            })
+            .then((todosResult) => {
+                // console.log(todosResult)
+                setTodos((oldState)=>{
+                    return [...todosResult];
+                });
+            });
+    }, []);
 
     // console.log('render');
 

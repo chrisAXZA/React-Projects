@@ -1,10 +1,10 @@
-import CreateGame from "./components/CreateGame.js";
+import Login from "./components/Login.js";
+import Header from "./components/Header.js";
 import EditGame from "./components/EditGame.js";
+import Register from "./components/Register.js";
+import CreateGame from "./components/CreateGame.js";
 import GameCatalog from "./components/GameCatalog.js";
 import GameDetails from "./components/GameDetails.js";
-import Header from "./components/Header.js";
-import Login from "./components/Login.js";
-import Register from "./components/Register.js";
 import WelcomeWorld from "./components/WelcomeWorld.js";
 
 function App() {
@@ -16,17 +16,17 @@ function App() {
             <main id="main-content">
                 <WelcomeWorld />
 
-                <Login />
+                {/* <Login /> */}
 
-                <Register />
+                {/* <Register /> */}
 
-                <CreateGame />
+                {/* <CreateGame /> */}
 
-                <EditGame />
+                {/* <EditGame /> */}
 
-                <GameDetails />
+                {/* <GameDetails /> */}
 
-                <GameCatalog />
+                {/* <GameCatalog /> */}
             </main>
 
         </div>

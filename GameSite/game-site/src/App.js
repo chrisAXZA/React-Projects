@@ -1,3 +1,5 @@
+import { createElement, useState } from 'react';
+
 import Login from "./components/Login.js";
 import Header from "./components/Header.js";
 import EditGame from "./components/EditGame.js";
@@ -8,19 +10,31 @@ import GameDetails from "./components/GameDetails.js";
 import WelcomeWorld from "./components/WelcomeWorld.js";
 
 function App() {
+    const [page, setPage] = useState('/home');
+
     const routes = {
-        '/home': WelcomeWorld,
-        '/games': GameCatalog,
-        '/create-game': CreateGame,
+        '/home': <WelcomeWorld />,
+        '/games': <GameCatalog />,
+        '/create-game': <CreateGame />,
+    };
+
+    const navigationChangeHandler = (path) => {
+        // console.log(path);
+        setPage(path);
     };
 
     return (
         <div id="box">
 
-            <Header />
+            <Header
+                navigationChangeHandler={navigationChangeHandler}
+            />
 
             <main id="main-content">
-                <WelcomeWorld />
+                {routes[page] || <h2>Page Not Found!</h2>}
+                {/* {createElement(routes[page]) || <h2>Page Not Found!</h2>} */}
+
+                {/* <WelcomeWorld /> */}
 
                 {/* <Login /> */}
 

@@ -1,10 +1,13 @@
-const Header = () => {
+const Header = ({
+    navigationChangeHandler,
+}) => {
     const onHeaderClick = (event) => {
         event.preventDefault();
 
-        if(event.target.tagName === 'A'){
+        if (event.target.tagName === 'A') {
             let url = new URL(event.target.href);
-            console.log(url.pathname);
+            // console.log(url.pathname);
+            navigationChangeHandler(url.pathname);
         }
     };
 

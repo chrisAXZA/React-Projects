@@ -8,6 +8,12 @@ import GameDetails from "./components/GameDetails.js";
 import WelcomeWorld from "./components/WelcomeWorld.js";
 
 function App() {
+    const routes = {
+        '/home': WelcomeWorld,
+        '/games': GameCatalog,
+        '/create-game': CreateGame,
+    };
+
     return (
         <div id="box">
 

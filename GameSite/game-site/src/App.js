@@ -4,11 +4,11 @@ import Login from "./components/Login.js";
 import Header from "./components/Header.js";
 import EditGame from "./components/EditGame.js";
 import Register from "./components/Register.js";
+import ErrorPage from './components/ErrorPage.js';
 import CreateGame from "./components/CreateGame.js";
-import GameCatalog from "./components/GameCatalog.js";
 import GameDetails from "./components/GameDetails.js";
 import WelcomeWorld from "./components/WelcomeWorld.js";
-import ErrorPage from './components/ErrorPage.js';
+import GameCatalog from "./components/GameCatalog/GameCatalog.js";
 
 function App() {
     const [page, setPage] = useState('/home');

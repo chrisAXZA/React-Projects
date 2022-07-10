@@ -1,11 +1,14 @@
-const GameCard = (props) => {
+// const GameCard = (props) => {
+const GameCard = ({
+    game
+}) => {
     return (
         <div className="allGames">
             <div className="allGames-info">
-                <img src={props.imageUrl} />
-                <h6>{props.category}</h6>
-                <h2>{props.title}</h2>
-                <a href="http://localhost:3030/data/games/{props._id}" className="details-button">Details</a>
+                <img src={game.imageUrl} />
+                <h6>{game.category}</h6>
+                <h2>{game.title}</h2>
+                <a href="http://localhost:3030/data/games/{game._id}" className="details-button">Details</a>
             </div>
         </div>
     );

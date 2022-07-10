@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import GameCard from './GameCard.js';
 
 const GameCatalog = () => {
     const [games, setGames] = useState([]);
@@ -20,9 +21,7 @@ const GameCatalog = () => {
         <section id="catalog-page">
             <h1>All Games</h1>
 
-            {
-                
-            }
+            {games.map((game) => <GameCard game={game} />)}
 
             <h3 className="no-articles">No games yet</h3>
         </section>

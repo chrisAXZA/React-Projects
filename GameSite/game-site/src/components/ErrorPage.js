@@ -7,7 +7,7 @@ const ErrorPage = ({
             <h1>Page Not Found</h1>
 
             {/* children will be rendered if passed on */}
-            {children && <h3 className="no-articles">{children}</h3>}
+            {children && <p className="no-articles">{children}</p>}
         </section>
     );
 };

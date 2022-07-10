@@ -36,6 +36,7 @@ function App() {
 
             <main id="main-content">
                 {routes[page] || <ErrorPage />}
+                {/* {routes[page] || <ErrorPage >Some Additional Info</ErrorPage>} */}
                 {/* {createElement(routes[page]) || <h2>Page Not Found!</h2>} */}
 
                 {/* <WelcomeWorld /> */}

@@ -13,18 +13,28 @@ import GameCatalog from "./components/GameCatalog/GameCatalog.js";
 function App() {
     const [page, setPage] = useState('/home');
 
-    const routes = {
-        // returns React-Component () and not component object, createElement is executed on given component
-        '/home': <WelcomeWorld />,
-        '/games': <GameCatalog />,
-        '/create-game': <CreateGame />,
-        '/login': <Login />,
-        '/register': <Register />,
-    };
-
     const navigationChangeHandler = (path) => {
         // console.log(path);
         setPage(path);
+    };
+
+    const router = (path) => {
+        let pathNames = path.split('/');
+        let [_, rootPath, argument] = pathNames;
+
+        console.log(rootPath, argument);
+
+        const routes = {
+            // returns React-Component () and not component object, createElement is executed on given component
+            '/home': <WelcomeWorld />,
+            '/games': <GameCatalog navigationChangeHandler={navigationChangeHandler} />,
+            '/create-game': <CreateGame />,
+            '/login': <Login />,
+            '/register': <Register />,
+            '/details': <GameDetails id={argument} />,
+        };
+
+        return routes[rootPath];
     };
 
     return (
@@ -35,7 +45,9 @@ function App() {
             />
 
             <main id="main-content">
-                {routes[page] || <ErrorPage />}
+                {/* {routes[page] || <ErrorPage />} */}
+                {router(page) || <ErrorPage />}
+
                 {/* {routes[page] || <ErrorPage >Some Additional Info</ErrorPage>} */}
                 {/* {createElement(routes[page]) || <h2>Page Not Found!</h2>} */}
 

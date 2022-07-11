@@ -1,6 +1,6 @@
 // const GameCard = (props) => {
 const GameCard = ({
-    game
+    game,
 }) => {
     return (
         <div className="allGames">

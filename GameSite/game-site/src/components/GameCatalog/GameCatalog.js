@@ -4,6 +4,10 @@ import GameCard from './GameCard.js';
 const GameCatalog = () => {
     const [games, setGames] = useState([]);
 
+    // setTimeout(() => {
+    // // useEffect here for delayed loading
+    // }, 1000);
+
     useEffect(() => {
         fetch('http://localhost:3030/data/games?sortBy=_createdOn%20desc')
             .then((res) => {
@@ -21,7 +25,7 @@ const GameCatalog = () => {
         <section id="catalog-page">
             <h1>All Games</h1>
 
-            {games.map((game) => <GameCard game={game} />)}
+            {games.map((game) => <GameCard key={game._id} game={game} />)}
 
             <h3 className="no-articles">No games yet</h3>
         </section>

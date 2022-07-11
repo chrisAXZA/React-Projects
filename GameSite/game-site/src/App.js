@@ -22,7 +22,7 @@ function App() {
         let pathNames = path.split('/');
         let [_, rootPath, argument] = pathNames;
 
-        console.log(rootPath, argument);
+        // console.log(rootPath, argument);
 
         const routes = {
             // returns React-Component () and not component object, createElement is executed on given component

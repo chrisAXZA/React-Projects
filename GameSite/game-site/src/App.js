@@ -26,12 +26,12 @@ function App() {
 
         const routes = {
             // returns React-Component () and not component object, createElement is executed on given component
-            '/home': <WelcomeWorld />,
-            '/games': <GameCatalog navigationChangeHandler={navigationChangeHandler} />,
-            '/create-game': <CreateGame />,
-            '/login': <Login />,
-            '/register': <Register />,
-            '/details': <GameDetails id={argument} />,
+            'home': <WelcomeWorld />,
+            'games': <GameCatalog navigationChangeHandler={navigationChangeHandler} />,
+            'create-game': <CreateGame />,
+            'login': <Login />,
+            'register': <Register />,
+            'details': <GameDetails id={argument} />,
         };
 
         return routes[rootPath];

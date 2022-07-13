@@ -1,3 +1,5 @@
+import React from 'react';
+
 const CreateGame = () => {
     return (
         <section id="create-page" className="auth">

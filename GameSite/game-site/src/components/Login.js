@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Login = () => {
     return (
         <section id="login-page" className="auth">

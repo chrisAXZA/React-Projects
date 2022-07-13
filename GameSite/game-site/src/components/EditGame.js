@@ -1,3 +1,5 @@
+import React from 'react';
+
 const EditGame = () => {
     return (
         <section id="edit-page" className="auth">

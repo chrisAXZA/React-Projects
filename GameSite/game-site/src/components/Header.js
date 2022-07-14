@@ -3,20 +3,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = ({
-    navigationChangeHandler,
+    // navigationChangeHandler,
 }) => {
-    const onHeaderClick = (event) => {
-        event.preventDefault();
+    // const onHeaderClick = (event) => {
+    //     event.preventDefault();
 
-        if (event.target.tagName === 'A') {
-            let url = new URL(event.target.href);
-            // console.log(url.pathname);
-            navigationChangeHandler(url.pathname);
-        }
-    };
+    //     if (event.target.tagName === 'A') {
+    //         let url = new URL(event.target.href);
+    //         // console.log(url.pathname);
+    //         navigationChangeHandler(url.pathname);
+    //     }
+    // };
 
     return (
-        <header onClick={onHeaderClick}>
+        <header>
             <h1><Link className="home" to="/home">GamesPlay</Link></h1>
             <nav>
                 <Link to="/games">All games</Link>

@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 import Login from "./components/Login.js";
 import Header from "./components/Header.js";
@@ -45,8 +46,16 @@ function App() {
             />
 
             <main id="main-content">
+                <Switch>
+                    <Route path="/" exact component={WelcomeWorld} />
+                    <Route path="/games" component={GameCatalog} />
+                    <Route path="/create-game" component={CreateGame} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/register" component={Register} />
+                </Switch>
+
+                {/* {router(page) || <ErrorPage />}  !!*/}
                 {/* {routes[page] || <ErrorPage />} */}
-                {router(page) || <ErrorPage />}
 
                 {/* {routes[page] || <ErrorPage >Some Additional Info</ErrorPage>} */}
                 {/* {createElement(routes[page]) || <h2>Page Not Found!</h2>} */}

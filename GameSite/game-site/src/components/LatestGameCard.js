@@ -2,7 +2,7 @@ import React from 'react';
 
 const LatestGameCard = ({
     game,
-    navigationChangeHandler,
+    // navigationChangeHandler,
 }) => {
     const onDetailsClick = (event) => {
         event.preventDefault();

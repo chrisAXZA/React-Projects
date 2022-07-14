@@ -1,14 +1,16 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 // const GameCard = (props) => {
 const GameCard = ({
     game,
-    navigationChangeHandler,
+    // navigationChangeHandler,
 }) => {
-    const onDetailsClick = (event) => {
-        event.preventDefault();
-        navigationChangeHandler(`/details/${game._id}`);
-    };
+    // const onDetailsClick = (event) => {
+    //     event.preventDefault();
+    //     navigationChangeHandler(`/details/${game._id}`);
+    // };
 
     return (
         <div className="allGames">
@@ -17,7 +19,12 @@ const GameCard = ({
                 <h6>{game.category}</h6>
                 <h2>{game.title}</h2>
                 {/* <a href="http://localhost:3030/data/games/{game._id}" className="details-button">Details</a> */}
-                <a href={`/details/${game._id}`} onClick={onDetailsClick} className="details-button">Details</a>
+                <Link
+                    to={`/details/${game._id}`}
+                    // onClick={onDetailsClick}
+                    className="details-button">
+                    Details
+                </Link>
             </div>
         </div>
     );

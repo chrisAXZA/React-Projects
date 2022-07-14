@@ -20,7 +20,7 @@ const GameCard = ({
                 <h2>{game.title}</h2>
                 {/* <a href="http://localhost:3030/data/games/{game._id}" className="details-button">Details</a> */}
                 <Link
-                    to={`/details/${game._id}`}
+                    to={`/games/${game._id}`}
                     // onClick={onDetailsClick}
                     className="details-button">
                     Details

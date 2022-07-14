@@ -12,37 +12,37 @@ import WelcomeWorld from "./components/WelcomeWorld.js";
 import GameCatalog from "./components/GameCatalog/GameCatalog.js";
 
 function App() {
-    const [page, setPage] = useState('/home');
+    // const [page, setPage] = useState('/home');
 
-    const navigationChangeHandler = (path) => {
-        // console.log(path);
-        setPage(path);
-    };
+    // const navigationChangeHandler = (path) => {
+    //     // console.log(path);
+    //     setPage(path);
+    // };
 
-    const router = (path) => {
-        let pathNames = path.split('/');
-        let [_, rootPath, argument] = pathNames;
+    // const router = (path) => {
+    //     let pathNames = path.split('/');
+    //     let [_, rootPath, argument] = pathNames;
 
-        // console.log(rootPath, argument);
+    //     // console.log(rootPath, argument);
 
-        const routes = {
-            // returns React-Component () and not component object, createElement is executed on given component
-            'home': <WelcomeWorld navigationChangeHandler={navigationChangeHandler} />,
-            'games': <GameCatalog navigationChangeHandler={navigationChangeHandler} />,
-            'create-game': <CreateGame />,
-            'login': <Login />,
-            'register': <Register />,
-            'details': <GameDetails id={argument} />,
-        };
+    //     const routes = {
+    //         // returns React-Component () and not component object, createElement is executed on given component
+    //         'home': <WelcomeWorld navigationChangeHandler={navigationChangeHandler} />,
+    //         'games': <GameCatalog navigationChangeHandler={navigationChangeHandler} />,
+    //         'create-game': <CreateGame />,
+    //         'login': <Login />,
+    //         'register': <Register />,
+    //         'details': <GameDetails id={argument} />,
+    //     };
 
-        return routes[rootPath];
-    };
+    //     return routes[rootPath];
+    // };
 
     return (
         <div id="box">
 
             <Header
-                navigationChangeHandler={navigationChangeHandler}
+                // navigationChangeHandler={navigationChangeHandler}
             />
 
             <main id="main-content">

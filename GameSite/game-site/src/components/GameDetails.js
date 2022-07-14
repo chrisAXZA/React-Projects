@@ -5,6 +5,8 @@ import * as gameService from '../services/gameService.js';
 const GameDetails = ({
     id,
 }) => {
+    console.log(id);
+
     const [game, setGame] = useState({});
 
     // useEffect(() => {

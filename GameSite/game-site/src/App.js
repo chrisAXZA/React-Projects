@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Login from "./components/Login.js";
 import Header from "./components/Header.js";
@@ -42,7 +42,7 @@ function App() {
         <div id="box">
 
             <Header
-                // navigationChangeHandler={navigationChangeHandler}
+            // navigationChangeHandler={navigationChangeHandler}
             />
 
             <main id="main-content">
@@ -53,6 +53,18 @@ function App() {
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <Route path="/games/:gameId" component={GameDetails} />
+                    <Route path="/custom" >
+                        <h2>Custom Page</h2>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam, eaque.</p>
+                    </Route>
+                    <Route path="/logout" render={(props) => { // can also be used component instead of render
+                        console.log('logout');
+                        // Alternative with history redirect
+                        // return props.history.push('/');
+
+                        return <Redirect to="/" />;
+                    }}
+                    />
                 </Switch>
 
                 {/* {router(page) || <ErrorPage />}  !!*/}

@@ -1,8 +1,11 @@
-import { React, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 
 import * as gameService from '../../services/gameService.js';
 
-import GameCard from './GameCard.js';
+// import GameCard from './GameCard.js';
+// conditional import of component, will be executed during runtime
+// import('./GameCard.js') 
+const GameCard = React.lazy(() => import('./GameCard.js'));
 
 const GameCatalog = ({
     navigationChangeHandler,
@@ -39,12 +42,13 @@ const GameCatalog = ({
     return (
         <section id="catalog-page">
             <h1>All Games</h1>
-
-            {
-                games.length > 0
-                    ? games.map((game) => <GameCard key={game._id} game={game} navigationChangeHandler={navigationChangeHandler} />)
-                    : <h3 className="no-articles">No games yet</h3>
-            }
+            <Suspense fallback={<h1>Loading...</h1>}>
+                {
+                    games.length > 0
+                        ? games.map((game) => <GameCard key={game._id} game={game} navigationChangeHandler={navigationChangeHandler} />)
+                        : <h3 className="no-articles">No games yet</h3>
+                }
+            </Suspense>
 
             {/* { loading ? <h1>Loading...</h1> : games.length > 0 ? games.map((game) => <GameCard key={game._id} game={game} />) : <h3 className="no-articles">No games yet</h3> } */}
 

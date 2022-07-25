@@ -13,7 +13,9 @@ function App() {
 
             {<Header />}
 
-            <main id="site-content"></main>
+            <main id="site-content">
+                
+            </main>
 
             {<Login />}
 

@@ -3,10 +3,12 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 import * as authService from '../../services/authService.js';
 
-const Login = () => {
+const Login = ({
+    onLogin,
+}) => {
     const navigate = useNavigate();
 
-    const onLogin = (event) => {
+    const onLoginHandler = (event) => {
         event.preventDefault();
 
         let formData = new FormData(event.currentTarget);
@@ -16,13 +18,15 @@ const Login = () => {
 
         authService.login(email);
 
+        onLogin(email);
+
         // history.push() is replaced by Navigate in React Router 6
         navigate('/');
     };
 
     return (
         <section id="login-page" className="login">
-            <form id="login-form" onSubmit={onLogin}>
+            <form id="login-form" onSubmit={onLoginHandler}>
                 <fieldset>
                     <legend>Login Form</legend>
                     <p className="field">

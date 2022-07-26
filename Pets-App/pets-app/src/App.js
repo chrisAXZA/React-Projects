@@ -21,8 +21,17 @@ function App() {
         setUserInfo({
             isAuthenticated: Boolean(user),
             user,
-        })
+        });
     }, []);
+
+    // saving in localStorage is a slow process and might not be executed before 
+    // onLogin is executed, thus better practise to pass on to Login component
+    const onLogin = (username) => {
+        setUserInfo({
+            isAuthenticated: true,
+            user: username,
+        });
+    };
 
     return (
         <div id="container">
@@ -33,7 +42,7 @@ function App() {
             <main id="site-content">
                 <Routes>
                     <Route path="/" element={<Dashboard />} />
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/login" element={<Login onLogin={onLogin} />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/my-pets" element={<MyPets />} />
                     <Route path="/create" element={<Create />} />

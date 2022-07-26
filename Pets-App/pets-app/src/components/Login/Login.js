@@ -1,6 +1,10 @@
+import { Navigate, useNavigate } from 'react-router-dom';
+
 import * as authService from '../../services/authService.js';
 
 const Login = () => {
+    const navigate = useNavigate();
+
     const onLogin = (event) => {
         event.preventDefault();
 
@@ -10,6 +14,9 @@ const Login = () => {
         let email = formData.get('email');
 
         authService.login(email);
+
+        // history.push() is replaced by Navigate in React Router 6
+        navigate('/');
     };
 
     return (

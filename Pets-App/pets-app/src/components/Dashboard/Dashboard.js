@@ -1,15 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import * as petService from '../../services/petService.js';
 
 import PetCard from './PetCard';
 
 const Dashboard = () => {
+    const [pets, setPets] = useState([]);
+
+    useEffect(() => {
+        petService.getAll()
+            .then((result) => {
+                setPets(result);
+            });
+    }, []);
+
     return (
         <section id="dashboard-page" className="dashboard">
             <h1>Dashboard</h1>
             <ul className="other-pets-list">
 
+                {pets.map((p) => <PetCard key={p._id} pet={p} />)}
 
                 {/* <li className="otherPet">
                     <h3>Name: Buddy</h3>

@@ -1,4 +1,4 @@
-import Dashboard from "../Dashboard/Dashboard.js";
+import React from 'react';
 
 const Details = () => {
     return (

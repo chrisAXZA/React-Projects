@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Dashboard = () => {
     return (
         <section id="dashboard-page" className="dashboard">

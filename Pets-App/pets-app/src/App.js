@@ -1,4 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+
+import * as authService from './services/authService.js';
 
 import Login from "./components/Login";
 import Header from "./components/Header";
@@ -10,10 +13,22 @@ import Register from "./components/Register/Register.js";
 import Dashboard from "./components/Dashboard/Dashboard.js";
 
 function App() {
+    const [userInfo, setUserInfo] = useState({ isAuthenticated: false, username: '', });
+
+    useEffect(() => {
+        let user = authService.getUser();
+
+        setUserInfo({
+            isAuthenticated: Boolean(user),
+            user,
+        })
+    }, []);
+
     return (
         <div id="container">
-
-            {<Header />}
+            {/* react deconstruct of Object into separate params */}
+            {<Header {...userInfo} />}
+            {/* {<Header userInfo={userInfo} />} */}
 
             <main id="site-content">
                 <Routes>

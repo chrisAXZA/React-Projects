@@ -1,3 +1,4 @@
+import React from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import * as authService from '../../services/authService.js';

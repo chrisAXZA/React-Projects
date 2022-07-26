@@ -1,3 +1,5 @@
+import React from 'react';
+
 const MyPets = () => {
     return (
         <section id="my-pets-page" className="my-pets">

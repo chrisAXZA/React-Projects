@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import * as petService from '../../services/petService.js';
 
 import PetCard from './PetCard';
 
@@ -7,8 +9,8 @@ const Dashboard = () => {
         <section id="dashboard-page" className="dashboard">
             <h1>Dashboard</h1>
             <ul className="other-pets-list">
-                
-                
+
+
                 {/* <li className="otherPet">
                     <h3>Name: Buddy</h3>
                     <p>Type: dog</p>

@@ -26,6 +26,8 @@ function App() {
 
     // saving in localStorage is a slow process and might not be executed before 
     // onLogin is executed, thus better practise to pass on to Login component
+    // In addition, React will not respond dynamically to any changes in localStorage, 
+    // thus additional state changing logic is required (or with the use of context-API)
     const onLogin = (username) => {
         setUserInfo({
             isAuthenticated: true,

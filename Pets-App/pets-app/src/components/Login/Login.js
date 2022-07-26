@@ -1,7 +1,17 @@
 const Login = () => {
+    const onLogin = (event) => {
+        event.preventDefault();
+
+        let formData = new FormData(event.currentTarget);
+        // console.log(formData.get('email'));
+        // console.log(formData.get('password'));
+        let email = formData.get('email');
+
+    };
+
     return (
         <section id="login-page" className="login">
-            <form id="login-form" action="" method="">
+            <form id="login-form" onSubmit={onLogin}>
                 <fieldset>
                     <legend>Login Form</legend>
                     <p className="field">

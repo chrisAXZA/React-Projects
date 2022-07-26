@@ -1,3 +1,5 @@
+import * as authService from '../../services/authService.js';
+
 const Login = () => {
     const onLogin = (event) => {
         event.preventDefault();
@@ -7,6 +9,7 @@ const Login = () => {
         // console.log(formData.get('password'));
         let email = formData.get('email');
 
+        authService.login(email);
     };
 
     return (

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 // import * as petService from '../../services/petService.js';
 
 // import PetCard from './PetCard';
+import PetList from '../PetList';
 
 const Dashboard = () => {
     // const [pets, setPets] = useState([]);
@@ -21,7 +22,9 @@ const Dashboard = () => {
 
             {/* nested Routes */}
             <nav>
-                <Route path="all" />
+                <Routes>
+                    <Route path="/" element={<PetList />} />
+                </Routes>
             </nav>
 
         </section>

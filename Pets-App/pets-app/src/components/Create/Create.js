@@ -6,8 +6,9 @@ import * as petService from '../../services/petService.js';
 
 const Create = () => {
     const navigate = useNavigate();
-    
+
     const onPetCreate = (event) => {
+        event.preventDefault();
 
         let formData = new FormData(event.currentTarget);
 

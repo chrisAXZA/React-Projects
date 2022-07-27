@@ -18,9 +18,6 @@ const Details = () => {
         setPet(petResult);
     }, []);
 
-    // petService.getOne(petId)
-    //     .then();
-
     return (
         <section id="details-page" className="details">
             <div className="pet-information">

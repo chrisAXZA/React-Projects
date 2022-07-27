@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 
 // import * as petService from '../../services/petService.js';
 
@@ -22,10 +22,15 @@ const Dashboard = () => {
 
             {/* nested Routes */}
             <nav>
+                <Link to="types">Types +++ </Link>
+            </nav>
+
+            <section>
                 <Routes>
                     <Route path="/" element={<PetList />} />
+                    <Route path="/types" element={<p>Types ... </p>} />
                 </Routes>
-            </nav>
+            </section>
 
         </section>
     );

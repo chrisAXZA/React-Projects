@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 import * as authService from '../../services/authService.js';
 
 const Logout = ({
-    onLogout
+    onLogout, // passed by App.js
 }) => {
     authService.logout(); // clears localStorage of current user data
     

@@ -21,7 +21,7 @@ const Login = ({
         onLogin(email);
 
         // history.push() is replaced by Navigate in React Router 6
-        navigate('/');
+        navigate('/dashboard');
     };
 
     return (

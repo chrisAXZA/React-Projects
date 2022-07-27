@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 
+import logo from '../../logo.svg';
 // import * as petService from '../../services/petService.js';
 
 // import PetCard from './PetCard';

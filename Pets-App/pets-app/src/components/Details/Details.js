@@ -12,10 +12,17 @@ const Details = () => {
     // by default empty object, otherwise will return undefined in HTML template
     const [pet, setPet] = useState({});
 
-    useEffect(async () => {
-        let petResult = await petService.getOne(petId);
+    // useEffect(async () => {
+    //     let petResult = await petService.getOne(petId);
 
-        setPet(petResult);
+    //     setPet(petResult);
+    // }, []);
+    useEffect(() => {
+        async function fetchData() {
+            let petResult = await petService.getOne(petId);
+
+            setPet(petResult);
+        }
     }, []);
 
     return (

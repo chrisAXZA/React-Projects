@@ -8,10 +8,10 @@ const Logout = ({
     onLogout, // passed by App.js
 }) => {
     authService.logout(); // clears localStorage of current user data
-    
+
     onLogout();
 
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace={true} />;
 };
 
 export default Logout;

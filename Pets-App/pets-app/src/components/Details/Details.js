@@ -9,7 +9,8 @@ const Details = () => {
     const { petId } = useParams();
     // let params = useParams();
 
-    const [pet, setPet] = useState();
+    // by default empty object, otherwise will return undefined in HTML template
+    const [pet, setPet] = useState({});
 
     useEffect(async () => {
         let petResult = await petService.getOne(petId);

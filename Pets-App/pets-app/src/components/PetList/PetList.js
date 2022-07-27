@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+import * as petService from '../../services/petService.js'
+
+import PetCard from './PetCard';
+
 const PetList = () => {
     const [pets, setPets] = useState([]);
 

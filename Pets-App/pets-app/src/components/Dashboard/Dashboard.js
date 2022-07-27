@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 
+// Variant 1
 import logo from '../../logo.svg';
-// import * as petService from '../../services/petService.js';
 
-// import PetCard from './PetCard';
+// Variant 2, named import, bundler will transform into React Component
+import { ReactComponent as Logo } from '../../logo.svg';
+
+import './Dashboard.css';
 import PetList from '../PetList';
 
 const Dashboard = () => {
@@ -33,6 +36,12 @@ const Dashboard = () => {
                     <Route path="/types" element={<p>Types ... </p>} />
                 </Routes>
             </section>
+
+            {/* Variant 1 with img container */}
+            {/* <img src={logo} alt="logoImage" title="Logo" /> */}
+
+            {/* Variant 2 with ReactComponent*/}
+            <Logo className="logo"/>
 
         </section>
     );

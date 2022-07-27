@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import * as petService from '../../services/petService.js';
 
 const Create = () => {
+    const navigate = useNavigate();
+    
     const onPetCreate = (event) => {
-        const navigate = useNavigate();
 
-        let formData = new FormdData(event.currentTarget);
+        let formData = new FormData(event.currentTarget);
 
         let name = formData.get('name');
         let description = formData.get('description');

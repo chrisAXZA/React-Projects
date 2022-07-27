@@ -20,12 +20,13 @@ const Dashboard = () => {
         <section id="dashboard-page" className="dashboard">
             <h1>Dashboard</h1>
 
-            {/* nested Routes */}
+            {/* Sub-Navigation */}
             <nav>
                 <Link to="types">Types +++ </Link>
             </nav>
 
             <section>
+                {/* nested Routes */}
                 <Routes>
                     <Route path="/" element={<PetList />} />
                     <Route path="/types" element={<p>Types ... </p>} />

@@ -17,12 +17,18 @@ const Create = () => {
                 let typesResult = Object.values(res);
 
                 let categories = typesResult.reduce((acc, curr) => {
-                    if (!acc.includes(curr.category)) {
-                        acc.push(curr.category);
+                    // if (!acc.includes(curr.category)) {
+                    //     acc.push(curr.category);
+                    // }
+
+                    if (!acc[curr.category]) {
+                        acc[curr.category] = [];
                     }
 
+                    acc[curr.category].push(curr);
+
                     return acc;
-                }, []);
+                }, {});
 
                 setCategories(categories);
                 setTypes(typesResult);
@@ -55,7 +61,8 @@ const Create = () => {
         // console.log(event.target.value);
         const category = event.target.value;
 
-        setTypes((state) => state.filter((t) => t.category === category));
+        // setTypes((state) => state.filter((t) => t.category === category));
+        setTypes(categories[category]);
     };
 
     return (
@@ -102,7 +109,14 @@ const Create = () => {
                                         value={t} >
                                         {t}
                                     </option>)} */}
-                                {categories.map((t) =>
+
+                                {/* {categories.map((t) =>
+                                    <option
+                                        key={t}
+                                        value={t} >
+                                        {t}
+                                    </option>)} */}
+                                {Object.keys(categories).map((t) =>
                                     <option
                                         key={t}
                                         value={t} >

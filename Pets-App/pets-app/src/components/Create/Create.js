@@ -8,12 +8,25 @@ const Create = () => {
     const navigate = useNavigate();
 
     const [types, setTypes] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:3030/jsonstore/types')
             .then((res) => res.json())
             .then((res) => {
-                setTypes(Object.values(res));
+                let typesResult = Object.values(res);
+
+                let categories = typesResult.reduce((acc, curr) => {
+                    if (!acc.includes(curr.category)) {
+                        acc.push(curr.category);
+                    }
+
+                    return acc;
+                }, []);
+
+                setCategories(categories);
+                setTypes(typesResult);
+                // setTypes(Object.values(res));
             });
     }, []);
 
@@ -36,6 +49,13 @@ const Create = () => {
             .then((result) => {
                 navigate('/dashboard');
             });
+    };
+
+    const onCategoryChange = (event) => {
+        // console.log(event.target.value);
+        const category = event.target.value;
+
+        setTypes((state) => state.filter((t) => t.category === category));
     };
 
     return (
@@ -65,11 +85,11 @@ const Create = () => {
                     <p className="field">
                         <label htmlFor="category">Category</label>
                         <span className="input">
-                            <select id="category" name="category">
+                            <select id="category" name="category" onChange={onCategoryChange}>
                                 {/* {types.reduce((acc, curr) => {
                                     return acc.add(curr.category);
                                  }, new Set()) */}
-                                {types.reduce((acc, curr) => {
+                                {/* {types.reduce((acc, curr) => {
                                     if (!acc.includes(curr.category)) {
                                         acc.push(curr.category);
                                     }
@@ -78,6 +98,12 @@ const Create = () => {
                                     // return acc[curr.category] = true;
                                 }, [])
                                     .map((t) => <option
+                                        key={t}
+                                        value={t} >
+                                        {t}
+                                    </option>)} */}
+                                {categories.map((t) =>
+                                    <option
                                         key={t}
                                         value={t} >
                                         {t}

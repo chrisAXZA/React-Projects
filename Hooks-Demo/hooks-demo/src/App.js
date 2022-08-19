@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import './App.css';
-import Counter from './Counter.js';
+import Counter from './components/Counter.js';
+import useDidMount from './hooks/useDidMount.js';
+import CharacterList from './components/CharacterList.js';
 
 function App() {
     // const stateResult = useState('');
@@ -25,9 +27,32 @@ function App() {
         setTimeout(() => {
             setName((oldState) => oldState + 'o');
             // setName('Pesho');
-            setInfo((oldState) => ({ ...oldState, age: 31, }));
+            // console.log('Pehso1');
+
+            setInfo((oldState) => ({
+                ...oldState,
+                age: 31,
+                // hobbies: [...oldState.hobbies, 'Tennis'],
+                hobbies: oldState.hobbies.concat('Tennis'),
+            }));
         }, 1500);
     }, [count]); // ComponentDidUpdate
+
+    // useDidMount custom hook
+    // useDidMount(() => {
+    //     setTimeout(() => {
+    //         setName((oldState) => oldState + 'o');
+    //         // setName('Pesho');
+    //         // console.log('Pehso1');
+
+    //         setInfo((oldState) => ({
+    //             ...oldState,
+    //             age: 31,
+    //             // hobbies: [...oldState.hobbies, 'Tennis'],
+    //             hobbies: oldState.hobbies.concat('Tennis'),
+    //         }));
+    //     }, 1500);
+    // });
 
     return (
         <div className="App">
@@ -37,6 +62,8 @@ function App() {
                 ? <Counter key="counter" count={count} />
                 : <h3>No Counter</h3>}
             <button onClick={() => setCount((c) => c + 1)}>+</button>
+
+            <CharacterList />
         </div>
     );
 }

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import './App.css';
 import Counter from './components/Counter.js';
 import useDidMount from './hooks/useDidMount.js';
+import AuthContext from './contexts/authContext.js';
 import CharacterList from './components/CharacterList.js';
 
 function App() {
@@ -29,12 +30,12 @@ function App() {
             // setName('Pesho');
             // console.log('Pehso1');
 
-            setInfo((oldState) => ({
-                ...oldState,
-                age: 31,
-                // hobbies: [...oldState.hobbies, 'Tennis'],
-                hobbies: oldState.hobbies.concat('Tennis'),
-            }));
+            // setInfo((oldState) => ({
+            //     ...oldState,
+            //     age: 31,
+            //     // hobbies: [...oldState.hobbies, 'Tennis'],
+            //     hobbies: oldState.hobbies.concat('Tennis'),
+            // }));
         }, 1500);
     }, [count]); // ComponentDidUpdate
 
@@ -54,17 +55,31 @@ function App() {
     //     }, 1500);
     // });
 
-    return (
-        <div className="App">
-            <h2>{name || 'Loading...'}</h2>
-            {/* <h2>{!name ? 'Loading...' : name}</h2> */}
-            {count < 10
-                ? <Counter key="counter" count={count} />
-                : <h3>No Counter</h3>}
-            <button onClick={() => setCount((c) => c + 1)}>+</button>
+    const addHobby = (hobby) => {
+        setInfo((oldState) => ({
+            ...oldState,
+            hobbies: oldState.hobbies.concat(hobby),
+        }));
+    };
 
-            <CharacterList />
-        </div>
+    return (
+        <AuthContext.Provider value={{ count, user: info, addHobby, }}>
+            <div className="App">
+                <h2>{name || 'Loading...'}</h2>
+                {/* <h2>{!name ? 'Loading...' : name}</h2> */}
+                {count < 10
+                    ? <Counter key="counter" count={count} />
+                    : <h3>No Counter</h3>}
+
+                <button onClick={() => setCount((c) => c + 1)}>+</button>
+
+                <h3>Hoobies</h3>
+                <ul>
+                    {info.hobbies.map((h) => <li key={h}>{h}</li>)}
+                </ul>
+                <CharacterList key="characterList" />
+            </div>
+        </AuthContext.Provider>
     );
 }
 

@@ -5,7 +5,7 @@ import * as authService from './services/authService.js';
 
 import Login from "./components/Login";
 import Header from "./components/Header";
-import Edit from "./components/Edit/Edit.js";
+// import Edit from "./components/Edit/Edit.js";
 import Create from "./components/Create/Create.js";
 import MyPets from "./components/MyPets/MyPets.js";
 import Logout from './components/Logout/Logout.js';

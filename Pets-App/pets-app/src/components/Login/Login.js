@@ -19,7 +19,11 @@ const Login = ({
 
         authService.login(email, password)
             .then((authData) => {
-                console.log(`Login Data >>> ${authData}`);
+                console.log(`Login Data >>>`);
+                console.log(`${authData}`);
+            })
+            .catch((err) => {
+                console.log(err);
             });
 
         onLogin(email);

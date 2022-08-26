@@ -2,13 +2,29 @@
 //     localStorage.setItem('username', username);
 // };
 
-export const login = (email, password) => {
-    return fetch('http://localhost:3030/users/login', {
+export const login = async (email, password) => {
+    let response = await fetch('http://localhost:3030/users/login', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ email, password }),
-    })
-        .then((res) => res.json());
+    });
+    // .then((res) => {
+    //     console.log(res);
+
+    //     if (res.ok) {
+    //         return res.json();
+    //     }
+
+    //     throw res.json();
+    // });
+
+    let jsonResult = await response.json();
+
+    if (response.ok) {
+        return jsonResult;
+    } else {
+        throw jsonResult.message;
+    }
 };
 
 export const getUser = () => {

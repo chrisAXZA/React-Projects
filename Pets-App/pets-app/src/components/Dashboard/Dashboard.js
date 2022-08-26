@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 
+import './Dashboard.css';
+
+import PetList from '../PetList';
+
 // Variant 1
-import logo from '../../logo.svg';
+// import logo from '../../logo.svg';
 
 // Variant 2, named import, bundler will transform into React Component
-import { ReactComponent as Logo } from '../../logo.svg';
-
-import './Dashboard.css';
-import PetList from '../PetList';
+// import { ReactComponent as Logo } from '../../logo.svg';
 
 const Dashboard = () => {
     // const [pets, setPets] = useState([]);
@@ -30,7 +31,7 @@ const Dashboard = () => {
             </nav>
 
             <section>
-                {/* nested Routes */}
+                {/* nested Routes DEMO */}
                 <Routes>
                     <Route path="/" element={<PetList />} />
                     <Route path="/types" element={<p>Types ... </p>} />
@@ -41,7 +42,7 @@ const Dashboard = () => {
             {/* <img src={logo} alt="logoImage" title="Logo" /> */}
 
             {/* Variant 2 with ReactComponent*/}
-            <Logo className="logo"/>
+            {/* <Logo className="logo"/> */}
 
         </section>
     );

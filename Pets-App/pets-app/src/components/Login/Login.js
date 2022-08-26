@@ -15,8 +15,12 @@ const Login = ({
         // console.log(formData.get('email'));
         // console.log(formData.get('password'));
         let email = formData.get('email');
+        let password = formData.get('password');
 
-        authService.login(email);
+        authService.login(email, password)
+            .then((authData) => {
+                console.log(`Login Data >>> ${authData}`);
+            });
 
         onLogin(email);
 

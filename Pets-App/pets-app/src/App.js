@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { AuthContext } from './contexts/AuthContext.js'
 
@@ -20,25 +20,25 @@ function App() {
         accessToken: '',
     });
 
-    const onLogin = (authData) => {
+    const login = (authData) => {
         setUser(authData);
     };
 
-    const onLogout = () => {
+    // const onLogout = () => {
 
-    };
+    // };
 
     return (
-        <AuthContext.Provider value={true}>
+        <AuthContext.Provider value={{ user, login }}>
             <div id="container">
                 {/* <Header {...user} /> */}
-                <Header email={user.email} />
+                <Header />
 
                 <main id="site-content">
                     <Routes>
                         <Route path="/dashboard/*" element={<Dashboard />} />
-                        <Route path="/login" element={<Login onLogin={onLogin} />} />
-                        <Route path="/logout" element={<Logout onLogout={onLogout} />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/logout" element={<Logout />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/my-pets" element={<MyPets />} />
                         <Route path="/create" element={<Create />} />

@@ -2,8 +2,10 @@
 //     localStorage.setItem('username', username);
 // };
 
+const baseUrl = 'http://localhost:3030';
+
 export const login = async (email, password) => {
-    let response = await fetch('http://localhost:3030/users/login', {
+    let response = await fetch(`${baseUrl}/users/login`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -27,6 +29,12 @@ export const login = async (email, password) => {
     }
 };
 
+export const logout = () => {
+    fetch(`${baseUrl}/users/logout`)
+        .then()
+
+};
+
 export const getUser = () => {
     let username = localStorage.getItem('username');
     return username;
@@ -34,8 +42,4 @@ export const getUser = () => {
 
 export const isAuthenticated = () => {
     return Boolean(getUser());
-};
-
-export const logout = () => {
-    localStorage.removeItem('username');
 };

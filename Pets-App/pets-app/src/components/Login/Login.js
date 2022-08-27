@@ -19,17 +19,17 @@ const Login = ({
 
         authService.login(email, password)
             .then((authData) => {
-                console.log(`Login Data >>>`);
-                console.log(`${authData}`);
+                // console.log(`Login Data >>> ${authData}`);
+                onLogin(authData);
+                navigate('/dashboard');
             })
             .catch((err) => {
                 console.log(err);
             });
 
-        onLogin(email);
-
+        // onLogin(email);
         // history.push() is replaced by Navigate in React Router 6
-        navigate('/dashboard');
+        // navigate('/dashboard');
     };
 
     return (

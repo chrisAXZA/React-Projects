@@ -14,18 +14,40 @@ import Register from "./components/Register/Register.js";
 import Dashboard from "./components/Dashboard/Dashboard.js";
 
 function App() {
+    const [userInfo, setUserInfo] = useState({ isAuthenticated: false, username: '', });
 
+    useEffect(() => {
+        let user = authService.getUser();
+
+        setUserInfo({
+            isAuthenticated: Boolean(user),
+            user,
+        });
+    }, []);
+
+    // saving in localStorage is a slow process and might not be executed before 
+    // onLogin is executed, thus better practise to pass on to Login component
+    // In addition, React will not respond dynamically to any changes in localStorage, 
+    // thus additional state changing logic is required (or with the use of context-API)
     const onLogin = (username) => {
-
+        setUserInfo({
+            isAuthenticated: true,
+            user: username,
+        });
     };
 
     const onLogout = () => {
-
+        setUserInfo({
+            isAuthenticated: false,
+            user: null,
+        });
     };
 
     return (
         <div id="container">
+            {/* react deconstruct of Object into separate params */}
             {<Header {...userInfo} />}
+            {/* {<Header userInfo={userInfo} />} */}
 
             <main id="site-content">
                 <Routes>

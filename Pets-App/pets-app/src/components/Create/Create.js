@@ -1,46 +1,17 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as petService from '../../services/petService.js';
+import { AuthContext } from '../../contexts/AuthContext.js';
 
 const Create = () => {
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-
-    const [types, setTypes] = useState([]);
-    const [categories, setCategories] = useState([]);
-
-    useEffect(() => {
-        fetch('http://localhost:3030/jsonstore/types')
-            .then((res) => res.json())
-            .then((res) => {
-                let typesResult = Object.values(res);
-
-                let categories = typesResult.reduce((acc, curr) => {
-                    // if (!acc.includes(curr.category)) {
-                    //     acc.push(curr.category);
-                    // }
-
-                    if (!acc[curr.category]) {
-                        acc[curr.category] = [];
-                    }
-
-                    acc[curr.category].push(curr);
-
-                    return acc;
-                }, {});
-
-                setCategories(categories);
-                setTypes(typesResult);
-                // setTypes(Object.values(res));
-            });
-    }, []);
 
     const onPetCreate = (event) => {
         event.preventDefault();
 
         let formData = new FormData(event.currentTarget);
-
         let name = formData.get('name');
         let description = formData.get('description');
         let imageUrl = formData.get('imageUrl');
@@ -51,18 +22,10 @@ const Create = () => {
             description,
             imageUrl,
             type,
-        })
+        }, user.accessToken)
             .then((result) => {
                 navigate('/dashboard');
             });
-    };
-
-    const onCategoryChange = (event) => {
-        // console.log(event.target.value);
-        const category = event.target.value;
-
-        // setTypes((state) => state.filter((t) => t.category === category));
-        setTypes(categories[category]);
     };
 
     return (
@@ -90,56 +53,12 @@ const Create = () => {
                     </p>
 
                     <p className="field">
-                        <label htmlFor="category">Category</label>
-                        <span className="input">
-                            <select id="category" name="category" onChange={onCategoryChange}>
-                                {/* {types.reduce((acc, curr) => {
-                                    return acc.add(curr.category);
-                                 }, new Set()) */}
-                                {/* {types.reduce((acc, curr) => {
-                                    if (!acc.includes(curr.category)) {
-                                        acc.push(curr.category);
-                                    }
-
-                                    return acc;
-                                    // return acc[curr.category] = true;
-                                }, [])
-                                    .map((t) => <option
-                                        key={t}
-                                        value={t} >
-                                        {t}
-                                    </option>)} */}
-
-                                {/* {categories.map((t) =>
-                                    <option
-                                        key={t}
-                                        value={t} >
-                                        {t}
-                                    </option>)} */}
-                                {Object.keys(categories).map((t) =>
-                                    <option
-                                        key={t}
-                                        value={t} >
-                                        {t}
-                                    </option>)}
-                            </select>
-                        </span>
-                    </p>
-
-                    <p className="field">
                         <label htmlFor="type">Type</label>
                         <span className="input">
                             <select id="type" name="type">
-                                {types.map((t) => <option
-                                    key={t._id}
-                                    value={t._id} >
-                                    {t.name}
-                                </option>)}
-                                {/* <option value="cat">Cat</option> */}
-                                {/* <option value="dog">Dog</option> */}
-                                {/* <option value="parrot">Parrot</option> */}
-                                {/* <option value="reptile">Reptile</option> */}
-                                {/* <option value="other">Other</option> */}
+                                <option value="cats"> Cats </option>)
+                                <option value="dogs"> Dogs </option>)
+                                <option value="other"> Other </option>)
                             </select>
                         </span>
                     </p>

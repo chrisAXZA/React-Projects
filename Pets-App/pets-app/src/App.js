@@ -14,10 +14,14 @@ import Register from "./components/Register/Register.js";
 import Dashboard from "./components/Dashboard/Dashboard.js";
 
 function App() {
-    const [] = useState();
+    const [user, setUser] = useState({
+        _id: '',
+        email: '',
+        accessToken: '',
+    });
 
     const onLogin = (authData) => {
-        console.log(authData);
+        setUser(authData);
     };
 
     const onLogout = () => {
@@ -27,7 +31,8 @@ function App() {
     return (
         <AuthContext.Provider value={true}>
             <div id="container">
-                <Header />
+                {/* <Header {...user} /> */}
+                <Header email={user.email} />
 
                 <main id="site-content">
                     <Routes>

@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import React, { useState } from 'react';
 
 import { AuthContext } from './contexts/AuthContext.js'
+import useLocalStorage from './hooks/useLocalStorage.js';
 
 import Login from "./components/Login";
 import Header from "./components/Header";
@@ -14,7 +15,8 @@ import Register from "./components/Register/Register.js";
 import Dashboard from "./components/Dashboard/Dashboard.js";
 
 function App() {
-    const [user, setUser] = useState({
+    // const [user, setUser] = useState({
+    const [user, setUser] = useLocalStorage({
         _id: '',
         email: '',
         accessToken: '',

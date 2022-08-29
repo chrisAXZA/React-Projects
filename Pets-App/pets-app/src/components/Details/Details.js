@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 // useParams for params, useMatch for url
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import * as petService from '../../services/petService.js';
 import { AuthContext } from '../../contexts/AuthContext.js';
@@ -10,6 +10,7 @@ const Details = () => {
     const { petId } = useParams();
     const [pet, setPet] = useState({});
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchData() {
@@ -20,10 +21,22 @@ const Details = () => {
         fetchData();
     }, []);
 
+    const editHandler = () => {
+
+    };
+
+    const deleteHandler = (event) => {
+        event.preventDefault();
+        petService.deletePet(petId, user.accessToken)
+            .then(() => {
+                navigate('/dashboard');
+            });;
+    };
+
     const ownerButtons =
         (<>
-            <a className="button" href="#">Edit</a>
-            <a className="button" href="#">Delete</a>
+            <a className="button" onClick={editHandler}>Edit</a>
+            <a className="button" onClick={deleteHandler}>Delete</a>
         </>);
 
     const userButtons =

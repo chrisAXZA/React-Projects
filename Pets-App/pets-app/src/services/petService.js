@@ -28,6 +28,14 @@ export const create = async (petData, token) => {
     return result;
 };
 
+export const deletePet = (petId, token) => {
+    return fetch(`${baseUrl}/pets/${petId}`, {
+        method: 'DELETE',
+        headers: { 'X-Authorization': token, },
+    })
+        .then((res) => res.json());
+};
+
 export const getOne = (petId) => {
     return fetch(`${baseUrl}/pets/${petId}`)
         .then((res) => res.json());

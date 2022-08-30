@@ -14,24 +14,28 @@ import Details from "./components/Details/Details.js";
 import Register from "./components/Register/Register.js";
 import Dashboard from "./components/Dashboard/Dashboard.js";
 
+const initialAuthState = {
+    _id: '',
+    email: '',
+    accessToken: '',
+};
+
 function App() {
     // const [user, setUser] = useState({
-    const [user, setUser] = useLocalStorage({
-        _id: '',
-        email: '',
-        accessToken: '',
-    });
+    const [user, setUser] = useLocalStorage('user', initialAuthState);
 
     const login = (authData) => {
         setUser(authData);
     };
 
-    // const onLogout = () => {
-
-    // };
+    const logout = () => {
+        setUser(initialAuthState);
+        // setUser will call upon setItem, which will override current 
+        // user with initialAuthState
+    };
 
     return (
-        <AuthContext.Provider value={{ user, login }}>
+        <AuthContext.Provider value={{ user, login, logout }}>
             <div id="container">
                 {/* <Header {...user} /> */}
                 <Header />

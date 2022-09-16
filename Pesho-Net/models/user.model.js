@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
-import { isEmail } from 'validator';
+import isEmail from 'validator/lib/isEmail.js';
 
 dotenv.config({ path: './config/.env', });
 

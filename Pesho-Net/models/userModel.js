@@ -11,7 +11,7 @@ dotenv.config({ path: './config/.env', });
 
 const userSchema = new mongoose.Schema(
     {
-        pseudo: {
+        username: {
             type: String,
             required: true,
             minLength: 3,
@@ -57,7 +57,7 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre("save", async function (next) {
-    const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS);
+    const salt = await bcrypt.genSalt(Number(process.env.SALT_ROUNDS));
     this.password = await bcrypt.hash(this.password, salt);
     next();
 });

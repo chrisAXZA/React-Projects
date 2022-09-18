@@ -49,13 +49,14 @@ const userSchema = new mongoose.Schema(
         },
         likes: {
             type: [String],
-        }
+        },
     },
     {
         timestamps: true,
     },
 );
 
+// will be called before saving a new user into DB
 userSchema.pre("save", async function (next) {
     const salt = await bcrypt.genSalt(Number(process.env.SALT_ROUNDS));
     this.password = await bcrypt.hash(this.password, salt);

@@ -68,11 +68,25 @@ export const updateUser = async (req, res) => {
         // that needs to be called concurrently.
     } catch (error) {
         return res.status(500).json({ message: error });
-        
+
         // console.log(error);
         // The res.json function on the other handsets the content-type header to application/JSON 
         // so that the client treats the response string as a valid JSON object. 
         // It also then returns the response to the client.
+    }
+};
+
+export const deleteUser = async (req, res) => {
+    const userId = req.params.id;
+    validateObjectId(userId, res);
+
+    try {
+        // await UserModel.remove({ _id: req.params.id }).exec();
+        await UserModel.findByIdAndDelete(userId);
+
+        res.status(200).json({ message: `User with ID >>> ${userId} has been successfully deleted!` });
+    } catch (error) {
+        return res.status(500).json({ message: error });
     }
 };
 

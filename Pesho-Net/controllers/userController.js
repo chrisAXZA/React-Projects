@@ -30,8 +30,11 @@ export const getUserById = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
+    const ObjectId = mongoose.Types.ObjectId;
     const userId = req.params.id;
-    validateObjectId(userId, res);
+    if (!ObjectId.isValid(userId)) {
+        return res.status(400).send(`Invalid user ID! >>> ${userId}`);
+    }
 
     // await UserModel.findByIdAndUpdate(userId, { ...req.body }, { new: true, upsert: true, setDefaultsOnInsert: true, });
     // await UserModel.findByIdAndUpdate(userId, { bio: req.body.bio, }, { new: true, upsert: true, setDefaultsOnInsert: true, });
@@ -56,9 +59,7 @@ export const updateUser = async (req, res) => {
                         // It then returns the response to the client.
                     }
                 },
-            )
-            .clone()
-            .catch((err) => { console.log(err); });
+            );
         // Mongoose no longer allows executing the same query object twice. 
         // If you do, you'll get a Query was already executed error. 
         // Executing the same query instance twice is typically indicative 
@@ -77,8 +78,11 @@ export const updateUser = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
+    const ObjectId = mongoose.Types.ObjectId;
     const userId = req.params.id;
-    validateObjectId(userId, res);
+    if (!ObjectId.isValid(userId)) {
+        return res.status(400).send(`Invalid user ID! >>> ${userId}`);
+    }
 
     try {
         // await UserModel.remove({ _id: req.params.id }).exec();
@@ -90,10 +94,63 @@ export const deleteUser = async (req, res) => {
     }
 };
 
-function validateObjectId(userId, res) {
+export const followUser = async (req, res) => {
     const ObjectId = mongoose.Types.ObjectId;
+    const userId = req.params.id;
+    const userIdToFollow = req.body.userIdToFollow;
 
-    if (!ObjectId.isValid(userId)) {
-        return res.status(400).send(`Invalid user ID! >>> ${userId}`);
+    if (!ObjectId.isValid(userId) || !ObjectId.isValid(userIdToFollow)) {
+        return res.status(400).send(`Invalid user ID or ID to follow!`);
     }
-}
+
+    try {
+        await UserModel
+            .findByIdAndUpdate(
+                userId,
+                { $addToSet: { following: userIdToFollow }, },
+                { new: true, upsert: true, },
+                (err, userData) => {
+                    if (!err) {
+                        res.status(201).json(userData);
+                    } else if (err) {
+                        return res.status(400).json(err);
+                    }
+                },
+            );
+
+        await UserModel
+            .findByIdAndUpdate(
+                userIdToFollow,
+                { $addToSet: { followers: userId }, },
+                { new: true, upsert: true, },
+                (err) => {
+                    // two responses can not be returned
+                    if (err) {
+                        return res.status(400).json(err);
+                    }
+                },
+            );
+
+    } catch (error) {
+        return res.status(500).json({ message: error });
+    }
+};
+
+export const unfollowUser = async (req, res) => {
+    const userId = req.params.id;
+    validateObjectId(userId, res);
+
+    try {
+
+    } catch (error) {
+        return res.status(500).json({ message: error });
+    }
+};
+
+// function validateObjectId(userId, res, status400) {
+//     const ObjectId = mongoose.Types.ObjectId;
+
+//     if (!ObjectId.isValid(userId)) {
+//         return status400 = res.status(400).send(`Invalid user ID! >>> ${userId}`);
+//     }
+// }

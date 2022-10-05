@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { register } from '../controllers/authController.js';
+import { loginUser, logoutUser, register } from '../controllers/authController.js';
 import {
     deleteUser,
     followUser,
@@ -14,6 +14,8 @@ const router = Router();
 
 // authorization
 router.post('/register', register); // createUser
+router.post('/login', loginUser);
+router.get('/logout', logoutUser);
 
 // user DB queries + manipulations
 router.get('/', getAllUsers);

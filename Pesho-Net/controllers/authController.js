@@ -14,6 +14,14 @@ export const register = async (req, res) => {
     } catch (err) {
         console.log(err);
         // sends error in response
-        res.status(200).send({ error : err.message });
+        res.status(200).send({ error: err.message });
     }
+};
+
+export const loginUser = async (req, res) => {
+
+};
+
+export const logoutUser = async (req, res) => {
+
 };

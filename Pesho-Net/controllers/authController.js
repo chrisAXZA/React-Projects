@@ -1,7 +1,22 @@
+import * as dotenv from 'dotenv';
+import * as jwt from 'jsonwebtoken';
+
 import UserModel from "../models/userModel.js";
 
-// Contains logic for register, login, logout
+dotenv.config({ path: './config/.env', });
 
+const createToken = (userId) => {
+    return jwt.sign(
+        { id }, // payload
+        process.env.TOKEN_SECRET, // secret key
+        {
+            // expiresIn: 1 * 24 * 60 * 60 * 1000, // 1 day valid
+            expiresIn: 30 * 60 * 1000,
+        } // options/callback
+    );
+};
+
+// Contains logic for register/createUser, login, logout
 export const register = async (req, res) => {
     console.log(req.body);
 
@@ -19,6 +34,16 @@ export const register = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
+    console.log(req.body);
+    const { email, password } = req.body;
+
+    try {
+        const user = await UserModel.findOne({ email, password })
+        const token = createToken(user._id);
+
+    } catch (error) {
+        console.log(error);
+    }
 
 };
 

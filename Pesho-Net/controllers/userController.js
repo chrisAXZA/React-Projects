@@ -32,9 +32,12 @@ export const getUserById = async (req, res) => {
 export const updateUser = async (req, res) => {
     const ObjectId = mongoose.Types.ObjectId;
     const userId = req.params.id;
+
     if (!ObjectId.isValid(userId)) {
         return res.status(400).send(`Invalid user ID! >>> ${userId}`);
     }
+
+    // console.log(req.body);
 
     // await UserModel.findByIdAndUpdate(userId, { ...req.body }, { new: true, upsert: true, setDefaultsOnInsert: true, });
     // await UserModel.findByIdAndUpdate(userId, { bio: req.body.bio, }, { new: true, upsert: true, setDefaultsOnInsert: true, });
@@ -53,13 +56,16 @@ export const updateUser = async (req, res) => {
                     if (!err) {
                         return res.send(userData);
                     } else if (err) {
+                        // console.log(err);
+
                         return res.status(500).send({ message: err });
                         // The res.send function sets the content type to text/Html
                         // which means that the client will now treat it as text. 
                         // It then returns the response to the client.
                     }
                 },
-            );
+            )
+            .clone();
         // Mongoose no longer allows executing the same query object twice. 
         // If you do, you'll get a Query was already executed error. 
         // Executing the same query instance twice is typically indicative 
@@ -80,6 +86,7 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     const ObjectId = mongoose.Types.ObjectId;
     const userId = req.params.id;
+
     if (!ObjectId.isValid(userId)) {
         return res.status(400).send(`Invalid user ID! >>> ${userId}`);
     }
@@ -88,7 +95,8 @@ export const deleteUser = async (req, res) => {
         // await UserModel.remove({ _id: req.params.id }).exec();
         await UserModel.findByIdAndDelete(userId);
 
-        res.status(200).json({ message: `User with ID >>> ${userId} has been successfully deleted!` });
+        return res.status(200)
+            .json({ message: `User with ID >>> ${userId} has been successfully deleted!` });
     } catch (error) {
         return res.status(500).json({ message: error });
     }
@@ -116,7 +124,8 @@ export const followUser = async (req, res) => {
                         return res.status(400).json(err);
                     }
                 },
-            );
+            )
+            .clone();
 
         await UserModel
             .findByIdAndUpdate(
@@ -129,20 +138,53 @@ export const followUser = async (req, res) => {
                         return res.status(400).json(err);
                     }
                 },
-            );
-
+            )
+            .clone();
     } catch (error) {
+        // console.log(error);
         return res.status(500).json({ message: error });
     }
 };
 
 export const unfollowUser = async (req, res) => {
+    const ObjectId = mongoose.Types.ObjectId;
     const userId = req.params.id;
-    validateObjectId(userId, res);
+    const userIdToUnfollow = req.body.userIdToUnfollow;
+
+    if (!ObjectId.isValid(userId) || !ObjectId.isValid(userIdToUnfollow)) {
+        return res.status(400).send(`Invalid user ID or ID to unfollow!`);
+    }
 
     try {
+        await UserModel
+            .findByIdAndUpdate(
+                userId,
+                { $pull: { following: userIdToUnfollow } },
+                { new: true, upsert: true, },
+                (err, userData) => {
+                    if (!err) {
+                        res.status(201).json(userData);
+                    } else if (err) {
+                        return res.status(400).json(err);
+                    }
+                },
+            )
+            .clone();
 
+        await UserModel
+            .findByIdAndUpdate(
+                userIdToUnfollow,
+                { $pull: { followers: userId } },
+                { new: true, upsert: true, },
+                (err, userDate) => {
+                    if (err) {
+                        return res.status(400).json(err);
+                    }
+                },
+            )
+            .clone();
     } catch (error) {
+        // console.log(error);
         return res.status(500).json({ message: error });
     }
 };

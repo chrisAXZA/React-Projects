@@ -13,12 +13,12 @@ import {
 const router = Router();
 
 // authorization
-router.post('/register', register);
+router.post('/register', register); // createUser
 
 // user DB queries + manipulations
 router.get('/', getAllUsers);
-router.get('/:id', getUserById);
 router.put('/:id', updateUser);
+router.get('/:id', getUserById);
 router.delete('/:id', deleteUser);
 router.patch('/follow/:id', followUser);
 router.patch('/unfollow/:id', unfollowUser);

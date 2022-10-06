@@ -13,8 +13,12 @@ export const getAllUsers = async (req, res) => {
 
 // userInfo
 export const getUserById = async (req, res) => {
+    const ObjectId = mongoose.Types.ObjectId;
     const userId = req.params.id;
-    validateObjectId(userId, res);
+
+    if (!ObjectId.isValid(userId)) {
+        return res.status(400).send(`Invalid user ID! >>> ${userId}`);
+    }
 
     // const user = UserModel.findById(userId);
     // res.status(200).json(user);

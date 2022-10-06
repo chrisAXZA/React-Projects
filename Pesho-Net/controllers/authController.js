@@ -1,18 +1,19 @@
+import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
-import * as jwt from 'jsonwebtoken';
 
 import UserModel from "../models/userModel.js";
 
 dotenv.config({ path: './config/.env', });
 
+const maxAge = 30 * 60 * 1000;
 const createToken = (userId) => {
     return jwt.sign(
-        { id }, // payload
+        { userId }, // payload
         process.env.TOKEN_SECRET, // secret key
         {
             // expiresIn: 1 * 24 * 60 * 60 * 1000, // 1 day valid
-            expiresIn: 30 * 60 * 1000,
-        } // options/callback
+            expiresIn: maxAge,
+        }, // options/callback
     );
 };
 
@@ -29,22 +30,28 @@ export const register = async (req, res) => {
     } catch (err) {
         console.log(err);
         // sends error in response
-        res.status(200).send({ error: err.message });
+        res.status(200).send({ error: err.message, maxAge, });
     }
 };
 
 export const loginUser = async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { email, password } = req.body;
 
-    try {
-        const user = await UserModel.findOne({ email, password })
-        const token = createToken(user._id);
+    // const user = await UserModel.findOne({ email, password });
+    const user = await UserModel.login(email, password);
+    const token = createToken(user._id);
 
-    } catch (error) {
-        console.log(error);
+    res.cookie('jwt', token, { httpOnly: true });
+    res.status(200).json({ user: user._id });
+
+    if (!user) {
+        console.log('Error in login!');
     }
 
+    if (!token) {
+        console.log('Error generating a new token!');
+    }
 };
 
 export const logoutUser = async (req, res) => {

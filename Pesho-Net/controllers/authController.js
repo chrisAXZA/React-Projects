@@ -42,9 +42,6 @@ export const loginUser = async (req, res) => {
     const user = await UserModel.login(email, password);
     const token = createToken(user._id);
 
-    res.cookie('jwt', token, { httpOnly: true });
-    res.status(200).json({ user: user._id });
-
     if (!user) {
         console.log('Error in login!');
     }
@@ -52,8 +49,12 @@ export const loginUser = async (req, res) => {
     if (!token) {
         console.log('Error generating a new token!');
     }
+
+    res.cookie('jwt', token, { httpOnly: true });
+    res.status(200).json({ user: user._id });
 };
 
 export const logoutUser = async (req, res) => {
-
+    res.cookie('jwt', '', { maxAge: 1 });
+    res.redirect('/'); // redirect required for Postman
 };

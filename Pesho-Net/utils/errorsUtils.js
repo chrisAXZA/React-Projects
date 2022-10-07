@@ -25,3 +25,17 @@ export const registerErrors = (err) => {
 
     return errors;
 };
+
+export const loginErrors = (err) => {
+    const errors = { email: '', password: '', };
+
+    if (err.message.includes('email')) {
+        errors.email = 'The given email is not valid!';
+    }
+
+    if (err.message.includes('password')) {
+        errors.password = 'The given password is not valid!';
+    }
+
+    return errors;
+};

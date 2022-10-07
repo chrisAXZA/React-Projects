@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 
 import UserModel from "../models/userModel.js";
-import { registerErrors } from '../utils/errorsUtils.js';
+import { loginErrors, registerErrors } from '../utils/errorsUtils.js';
 
 dotenv.config({ path: './config/.env', });
 
@@ -39,7 +39,7 @@ export const register = async (req, res) => {
     }
 };
 
-export const loginUser = async (req, res) => {
+export const loginUser2 = async (req, res) => {
     // console.log(req.body);
     const { email, password } = req.body;
 
@@ -55,8 +55,26 @@ export const loginUser = async (req, res) => {
         console.log('Error generating a new token!');
     }
 
-    res.cookie('jwt', token, { httpOnly: true });
+    res.cookie('jwt', token, { httpOnly: true, maxAge, });
     res.status(200).json({ user: user._id });
+};
+
+
+export const loginUser = async (req, res) => {
+    console.log(req.body);
+    const { email, password } = req.body;
+
+    try {
+        const user = await UserModel.login(email, password);
+        const token = createToken(user._id);
+
+        res.cookie('jwt', token, { httpOnly: true, maxAge, });
+        res.status(200).json({ user: user._id });
+    } catch (error) {
+        // res.status(200).json({ error, message: error.message, });
+        const errors = loginErrors(error);
+        res.status(200).json({ errors });
+    }
 };
 
 export const logoutUser = async (req, res) => {

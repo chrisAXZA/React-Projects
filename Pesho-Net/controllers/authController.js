@@ -30,7 +30,8 @@ export const register = async (req, res) => {
     } catch (err) {
         console.log(err);
         // sends error in response
-        res.status(200).send({ error: err.message, maxAge, });
+        // res.status(200).send({ error: err.message, maxAge, });
+        res.status(200).send({ error: err, message: err.message });
     }
 };
 

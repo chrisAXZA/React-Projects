@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 
 import UserModel from "../models/userModel.js";
+import { registerErrors } from '../utils/errorsUtils.js';
 
 dotenv.config({ path: './config/.env', });
 
@@ -28,10 +29,13 @@ export const register = async (req, res) => {
         // sends response that new user has been created
         res.status(201).json({ user: user._id, });
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         // sends error in response
         // res.status(200).send({ error: err.message, maxAge, });
-        res.status(200).send({ error: err, message: err.message });
+        const errors = registerErrors(err);
+
+        res.status(200).send({ errors });
+        // res.status(200).send({ error: err, message: err.message });
     }
 };
 
